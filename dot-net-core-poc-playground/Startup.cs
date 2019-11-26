@@ -21,6 +21,12 @@ namespace dot_net_core_poc_playground
         {
             services.AddControllers();
             services.AddSingleton(typeof(Storage<>));
+            services.AddMvc(o => o.Conventions.Add(
+                new GenericControllerRouteConvention()
+            )).ConfigureApplicationPartManager(m =>
+                m.FeatureProviders.Add(new GenericTypeControllerFeatureProvider()
+            ));
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
